@@ -1,0 +1,7 @@
+.root {
+  @apply h-4 w-4;
+}
+
+.root:focus {
+  @apply ring-indigo-500;
+}

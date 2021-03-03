@@ -1,6 +1,6 @@
-import Nav from "../Navbar";
+import Nav from "../Navbar/Navbar";
 
-const Layout = ({ children, categories, seo }) => (
+const Layout = ({ children, categories }) => (
   <>
     <Nav categories={categories} />
     {children}

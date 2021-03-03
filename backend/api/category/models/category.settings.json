@@ -2,25 +2,21 @@
   "kind": "collectionType",
   "collectionName": "categories",
   "info": {
-    "name": "category"
+    "name": "category",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "slug": {
       "type": "uid",
-      "targetField": "name",
-      "required": true
-    },
-    "articles": {
-      "via": "category",
-      "collection": "article"
+      "targetField": "name"
     }
   }
 }

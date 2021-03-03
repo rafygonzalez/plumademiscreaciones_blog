@@ -1,0 +1,36 @@
+.body {
+  @apply text-sm leading-6 max-w-6xl mx-auto;
+}
+
+.heading {
+  @apply text-4xl mb-6 mt-6;
+}
+
+.pageHeading {
+  @apply pt-1 pb-4 text-2xl leading-7 font-bold tracking-wide;
+}
+
+.sectionHeading {
+  @apply pt-1 mb-4 font-semibold leading-7 tracking-wider text-2xl;
+}
+
+.sectionSubtitle{
+  @apply pt-1 mb-4 leading-7 tracking-wider text-lg font-semibold;
+}
+
+.articleHeading {
+  @apply pt-1 mb-2 font-bold tracking-wider text-lg text-accents-9;
+}
+
+.articleSubtitle{
+  @apply pt-1 text-sm tracking-wider text-accents-8;
+}
+
+
+.dListTitle {
+  @apply pt-1 mb-4 font-bold tracking-wider text-lg text-accents-9;
+}
+
+.dListDescription {
+  @apply pt-1 mb-4 leading-7 tracking-wider text-sm text-accents-8;
+}

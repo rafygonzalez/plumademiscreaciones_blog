@@ -6,6 +6,7 @@ import Head from "next/head";
 import { createContext } from "react";
 import { getStrapiMedia } from "@lib/media";
 import { fetchAPI } from "@lib/api";
+import { withApollo } from '@lib/graphql/withApollo';
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({});
@@ -42,4 +43,4 @@ MyApp.getInitialProps = async (ctx) => {
   return { ...appProps, pageProps: { global } };
 };
 
-export default MyApp;
+export default withApollo({ssr: true})(MyApp);

@@ -6,7 +6,6 @@ module.exports = {
    *
    * @return {Object}
    */
-
   async findOne(ctx) {
     const { slug } = ctx.params;
 
