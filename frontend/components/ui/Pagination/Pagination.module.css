@@ -1,0 +1,7 @@
+.root {
+  @apply flex justify-between items-center 
+}
+
+.root:focus {
+  @apply ring-indigo-500;
+}

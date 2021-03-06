@@ -1,22 +1,43 @@
 import CheckBox from "@components/ui/Checkbox";
 import { Filter } from "@lib/filteredResults";
-import React from "react";
+import React, { FC, InputHTMLAttributes } from "react";
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
-  name: string;
   filters: Filter[];
+  selectedFilters: string[];
 }
 
-const FilterList = ({ title, name, filters }: Props) => {
+const FilterList: FC<Props> = (props) => {
+  const {
+    className,
+    children,
+    onChange,
+    filters,
+    title,
+    selectedFilters,
+    ...rest
+  } = props;
+
   return (
-    <div className="mt-4 block">
-      <span className="text-gray-700">{title}</span>
-      <div className="mt-2">
-        {filters.map((filter) => 
-          <CheckBox text={filter.label} value={filter.criteria.value} />
-        )}
-      </div>
+    <div className="mt-4">
+      <span className="text-primary">{title}</span>
+      {filters.map((filter, i) => {
+        const isChecked = selectedFilters.find(
+          (value) => value === filter.criteria.value
+        )
+          ? true
+          : false;
+        return (
+          <CheckBox
+            key={filter.id}
+            checked={isChecked}
+            onChange={onChange}
+            text={filter.label}
+            value={filter.criteria.value}
+          />
+        );
+      })}
     </div>
   );
 };

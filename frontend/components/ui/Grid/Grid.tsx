@@ -1,34 +1,55 @@
-import cn from 'classnames'
-import { FC, ReactNode, Component } from 'react'
-import s from './Grid.module.css'
+import cn from 'classnames';
+import React, { FC, ReactNode, Component, Fragment } from 'react';
+import s from './Grid.module.css';
 
 interface Props {
-  className?: string
-  children?: ReactNode[] | Component[] | any[]
-  layout?: 'A' | 'B' | 'C' | 'D' | 'normal'
-  variant?: 'default' | 'filled'
+  className?: string;
+  children?: ReactNode | Component | ReactNode[] | Component[] | any[];
+  spacing?: number;
+  container?: boolean;
+  item?: boolean;
+  xs?: number;
+  sm?: number;
+  md?: number;
+  lg?: number;
+  xl?: number
 }
 
 const Grid: FC<Props> = ({
   className,
-  layout = 'A',
   children,
-  variant = 'default',
+  spacing,
+  container,
+  item,
+  xs,
+  sm,
+  md,
+  lg,
+  xl
 }) => {
-  const rootClassName = cn(
-    s.root,
-    {
-      [s.layoutA]: layout === 'A',
-      [s.layoutB]: layout === 'B',
-      [s.layoutC]: layout === 'C',
-      [s.layoutD]: layout === 'D',
-      [s.layoutNormal]: layout === 'normal',
-      [s.default]: variant === 'default',
-      [s.filled]: variant === 'filled',
-    },
-    className
-  )
-  return <div className={rootClassName}>{children}</div>
-}
-
-export default Grid
+  const bpProps = {
+    xs,
+    sm,
+    md,
+    lg,
+    xl
+  };
+  const breakpoints = Object.keys(bpProps)
+    .filter((name) => typeof bpProps[name] !== 'undefined')
+    .map((bpn) => `${bpn}:col-span-${bpProps[bpn]}`)
+    .toString()
+    .replace(',', ' ');
+  const spacingStyle = `gap-${spacing}`;
+  const rootClassName = cn(s.root, className, spacingStyle);
+  const itemClassName = cn(s.item, breakpoints);
+  
+  const renderComponent = () => {
+    if (container) return <div className={rootClassName}>{children}</div>;
+    else if (item) return <div className={itemClassName}>{children}</div>;
+    throw new Error(
+      'You must assign to Grid Component the properties "container" or "item"'
+    );
+  };
+  return <Fragment>{renderComponent()}</Fragment>;
+};
+export default Grid;

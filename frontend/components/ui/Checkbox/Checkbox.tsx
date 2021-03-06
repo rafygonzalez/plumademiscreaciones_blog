@@ -3,13 +3,11 @@ import s from "./Checkbox.module.css";
 import React, { InputHTMLAttributes } from "react";
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
-  onChange?: (...args: any[]) => any;
   text: string;
 }
 
 const CheckBox: React.FC<Props> = (props) => {
-  const { text, className, children, onChange, ...rest } = props;
+  const { text, className, children, onChange, name, value, checked,...rest } = props;
 
   const rootClassName = cn(s.root, {}, className);
 
@@ -24,11 +22,12 @@ const CheckBox: React.FC<Props> = (props) => {
     <div>
       <label htmlFor={rest.id} className="inline-flex items-center">
         <input
+          checked={checked}
           type="checkbox"
           className={rootClassName}
           onChange={handleOnChange}
-          name="accountType"
-          value="personal"
+          name={name}
+          value={value}
         />
         <span className="ml-2">{text}</span>
       </label>
